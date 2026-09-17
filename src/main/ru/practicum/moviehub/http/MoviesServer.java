@@ -16,8 +16,8 @@ public class MoviesServer {
             // Добавляем контекст для /movies
             server.createContext("/movies", new MoviesHandler(moviesStore));
 
-        } catch (IOException e) {
-            throw new RuntimeException("Не удалось создать HTTP-сервер", e);
+        } catch (IOException exception) {
+            throw new RuntimeException("Не удалось создать HTTP-сервер", exception);
         }
     }
 

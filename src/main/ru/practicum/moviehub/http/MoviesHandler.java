@@ -15,14 +15,14 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
     }
 
     @Override
-    public void handle(HttpExchange ex) throws IOException {
-        String method = ex.getRequestMethod();
+    public void handle(HttpExchange httpExchange) throws IOException {
+        String method = httpExchange.getRequestMethod();
         Gson gson = new Gson();
         if (method.equalsIgnoreCase("GET")) {
 
-            sendJson(ex, 200, gson.toJson(moviesStore.getAllMovies()));
+            sendJson(httpExchange, 200, gson.toJson(moviesStore.getAllMovies()));
         } else {
-            sendNoContent(ex);
+            sendNoContent(httpExchange);
         }
     }
 }

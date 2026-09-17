@@ -10,19 +10,19 @@ import java.nio.charset.StandardCharsets;
 abstract class BaseHttpHandler implements HttpHandler {
     protected static final String CT_JSON = "application/json; charset=UTF-8"; // !!! Укажите содержимое заголовка Content-Type
 
-    protected void sendJson(HttpExchange ex, int status, String json) throws IOException {
+    protected void sendJson(HttpExchange httpExchange, int status, String json) throws IOException {
 
-        ex.getResponseHeaders().set("Content-Type", CT_JSON);
+        httpExchange.getResponseHeaders().set("Content-Type", CT_JSON);
         byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
-        ex.sendResponseHeaders(status, bytes.length);
-        try (OutputStream outputStream = ex.getResponseBody()) {
+        httpExchange.sendResponseHeaders(status, bytes.length);
+        try (OutputStream outputStream = httpExchange.getResponseBody()) {
             outputStream.write(bytes);
         }
     }
 
-    protected void sendNoContent(HttpExchange ex) throws java.io.IOException {
-        ex.getResponseHeaders().set("Content-Type", CT_JSON);
-        ex.sendResponseHeaders(204, -1);
-        ex.close();
+    protected void sendNoContent(HttpExchange httpExchange) throws java.io.IOException {
+        httpExchange.getResponseHeaders().set("Content-Type", CT_JSON);
+        httpExchange.sendResponseHeaders(204, -1);
+        httpExchange.close();
     }
 }
